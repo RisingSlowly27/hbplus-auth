@@ -1,50 +1,149 @@
-# Welcome to your Expo app 👋
+# HBPlus Domain Restricted Authentication App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform authentication application built using **React Native (Expo + React Native for Web)** that allows users to log in using **Google OAuth** and restricts access to users belonging to a specific email domain.
 
-## Get started
+Only users with emails ending in **@hbplus.fit** are allowed to access the dashboard.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## Tech Stack
 
-2. Start the app
+- React Native (Expo)
+- React Native for Web
+- Google OAuth 2.0
+- Expo Auth Session
+- React Context API (State Management)
+- Expo Router (Navigation)
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## Features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Google Sign-In authentication
+- Email domain validation
+- Access restriction for unauthorized domains
+- Protected dashboard route
+- Logout functionality
+- Loading state during authentication
+- Clean and responsive UI
+- Cross-platform compatibility (Web + Mobile)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## Authentication Flow
 
-When you're ready, run:
+1. User clicks **Login with Google**
+2. Google OAuth authentication popup opens
+3. User selects a Google account
+4. App retrieves the **access token**
+5. The token is used to fetch the user's Google profile
+6. The app extracts the **email address**
+7. Email domain is validated
 
-```bash
-npm run reset-project
+### Access Logic
+
+If user.email.endsWith("@hbplus.fit") ➡ User is redirected to **Dashboard**
+Otherwise -> Access restricted. Please login using your official domain email.
+
+---
+
+## Domain Restriction Logic
+
+Domain validation is implemented using a simple email suffix check.
+
+Example:
+
+```javascript
+if (user.email.endsWith("@hbplus.fit")) {
+  router.push("/dashboard");
+} else {
+  alert("Access restricted. Please login using your official domain email.");
+}
+
+Protected Routes
+
+The Dashboard page is protected.
+
+Users cannot directly navigate to:
+
+/dashboard
+
+without authentication.
+
+If user === null, the application redirects to the Login page.
+
+Project Structure
+hbplus-auth
+│
+├── app
+│   ├── index.tsx          # Login Page
+│   ├── dashboard.tsx      # Protected Dashboard
+│   └── _layout.tsx        # Navigation Layout
+│
+├── src
+│   ├── context
+│   │   └── AuthContext.js
+│   │
+│   └── utils
+│       └── googleAuth.js
+│
+├── assets
+├── package.json
+└── README.md
+Setup Instructions
+1. Clone Repository
+git clone https://github.com/yourusername/hbplus-auth.git
+cd hbplus-auth
+2. Install Dependencies
+npm install
+3. Start Development Server
+npx expo start
+
+Press:
+
+w
+
+to run the Web version.
+
+Google OAuth Setup
+
+Go to Google Cloud Console
+
+Create an OAuth 2.0 Client ID
+
+Enable Google Identity Services
+
+Add the redirect URI:
+
+http://localhost:8081
+
+Copy the Client ID
+
+Paste it in:
+
+src/utils/googleAuth.js
+Deployment
+
+This application can be deployed on Netlify.
+
+Build for web:
+
+npx expo export:web
+
+Deploy the generated dist folder to Netlify.
+
+Future Improvements
+
+Role-based access (Admin / User)
+
+Firebase or Supabase integration
+
+Persistent login using secure token storage
+
+Improved UI/UX with design system
+
+Author
+
+Don Aloysius
+GitHub: https://github.com/RisingSlowly27
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
