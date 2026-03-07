@@ -42,7 +42,8 @@ Only users with emails ending in **@hbplus.fit** are allowed to access the dashb
 
 ### Access Logic
 
-If user.email.endsWith("@hbplus.fit") ➡ User is redirected to **Dashboard**
+If user.email.endsWith("@hbplus.fit") -> User is redirected to **Dashboard**
+
 Otherwise -> Access restricted. Please login using your official domain email.
 
 ---
@@ -59,10 +60,13 @@ if (user.email.endsWith("@hbplus.fit")) {
 } else {
   alert("Access restricted. Please login using your official domain email.");
 }
+```
 
-Protected Routes
+---
 
-The Dashboard page is protected.
+## Protected Routes
+
+The **Dashboard page** is protected.
 
 Users cannot directly navigate to:
 
@@ -70,80 +74,92 @@ Users cannot directly navigate to:
 
 without authentication.
 
-If user === null, the application redirects to the Login page.
+If `user === null`, the application redirects to the **Login page**.
 
-Project Structure
-hbplus-auth
-│
-├── app
-│   ├── index.tsx          # Login Page
-│   ├── dashboard.tsx      # Protected Dashboard
-│   └── _layout.tsx        # Navigation Layout
-│
-├── src
-│   ├── context
-│   │   └── AuthContext.js
-│   │
-│   └── utils
-│       └── googleAuth.js
-│
-├── assets
-├── package.json
-└── README.md
-Setup Instructions
-1. Clone Repository
-git clone https://github.com/yourusername/hbplus-auth.git
+---
+
+## Project Structure
+
+hbplus-auth\
+│\
+├── app\
+│ ├── index.tsx # Login Page\
+│ ├── dashboard.tsx # Protected Dashboard\
+│ └── layout.tsx # Navigation Layout\
+│\
+├── src\
+│ ├── context\
+│ │ └── AuthContext.js\
+│ │\
+│ └── utils\
+│ └── googleAuth.js\
+│\
+├── assets\
+├── package.json\
+└── README.md\
+
+---
+
+## Setup Instructions
+
+### 1. Clone Repository
+
+git clone https://github.com/RisingSlowly27/hbplus-auth.git
 cd hbplus-auth
-2. Install Dependencies
+
+### 2. Install Dependencies
+
 npm install
-3. Start Development Server
+
+### 3. Start Development Server
+
 npx expo start
 
 Press:
 
 w
 
-to run the Web version.
+to run the **Web version**.
 
-Google OAuth Setup
+---
 
-Go to Google Cloud Console
+## Google OAuth Setup
 
-Create an OAuth 2.0 Client ID
-
-Enable Google Identity Services
-
-Add the redirect URI:
-
-http://localhost:8081
-
-Copy the Client ID
-
-Paste it in:
+1. Go to **Google Cloud Console**
+2. Create an **OAuth 2.0 Client ID**
+3. Enable **Google Identity Services**
+4. Add the redirect URI:
+5. Copy the **Client ID**
+6. Paste it in:
 
 src/utils/googleAuth.js
-Deployment
 
-This application can be deployed on Netlify.
+---
+
+## Deployment
+
+This application can be deployed on **Netlify**.
 
 Build for web:
 
 npx expo export:web
 
-Deploy the generated dist folder to Netlify.
+Deploy the generated **dist folder** to Netlify.
 
-Future Improvements
+It has been deployed on Netlify : https://hbplus-auth-don.git
 
-Role-based access (Admin / User)
+## Future Improvements
 
-Firebase or Supabase integration
+- Role-based access (Admin / User)
+- Firebase or Supabase integration
+- Persistent login using secure token storage
+- Improved UI/UX with design system
 
-Persistent login using secure token storage
+---
 
-Improved UI/UX with design system
+## Author
 
-Author
+**Don Aloysius**
 
-Don Aloysius
-GitHub: https://github.com/RisingSlowly27
-```
+GitHub:
+https://github.com/RisingSlowly27
